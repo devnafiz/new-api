@@ -38,7 +38,14 @@ class ApiController extends Controller
      }
 
      public function ListEmployees(){
+           $employees=Employee::all();
 
+           return response()->json([
+                   "status" => 1,
+           'message' =>'Employee created sucessfully',
+           'data'=>$employees
+
+           ],200);
      }
 
 
