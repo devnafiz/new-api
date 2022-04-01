@@ -101,7 +101,23 @@ class ApiController extends Controller
 
      public function deleteEmployee($id){
 
+              if (Employee::where("id", $id)->exists()) {
 
+            $employee = Employee::find($id);
 
-     }
+            $employee->delete();
+
+            return response()->json([
+                "status" => 1,
+                "message" => "Employee deleted successfully"
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "message" => "Employee not found"
+            ], 404);
+        }
+    }
+
+     
 }
