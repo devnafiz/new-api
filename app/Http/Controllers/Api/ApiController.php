@@ -51,11 +51,52 @@ class ApiController extends Controller
 
      public function getSingleEmployee($id){
 
+          if(Employee::where('id',$id)->exists()){
+               $employee_details =Employee::where('id',$id)->first();
+
+               return response()->json([
+                     'status'=>'1',
+                      'message'=>'Employee is here',
+                      'data'=> $employee_details 
+               ]);
+
+          }else{
+
+               return response()->json([
+                      'status'=>'0',
+                      'message'=>'Employee not found'
+               ],404);
+          }
+
      }
 
      public function updateEmployee(Request $request, $id){
 
+             if(Employee::where('id',$id)->exists()){
 
+                $data= Employee::find($id);
+
+                $data->name =$request->name;
+                $data->email=$request->email;
+                $data->phone_no =$request->phone_no;
+                $data->gender =$request->gender;
+                $data->age = $request->age;
+                $data->save();
+
+                return response()->json([
+
+                  "status" => 1,
+                  "message" => "Employee updated successfully"
+                ]);
+
+
+             }else{
+
+               return response()->json([
+                    'status'=>'0',
+                    'message'=>'no update'
+               ],404);
+             }
      }
 
      public function deleteEmployee($id){
