@@ -35,7 +35,7 @@ Route::post('login',[StudentController::class,'login']);
 Route::group(["middleware"=>["auth:sanctum"]], function(){
 
 Route::get('profile',[StudentController::class,'profile']);
-Route::put('logout',[StudentController::class,'logout']);
+Route::get('logout',[StudentController::class,'logout']);
 
 
 

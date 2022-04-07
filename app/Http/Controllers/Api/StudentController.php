@@ -98,8 +98,13 @@ class StudentController extends Controller
       ]);
       }
 
-      public function logout($id){
+      public function logout(){
 
+         auth()->user()->tokens()->delete();
 
+         return response()->json([
+              'status'=>'1',
+              'message'=>'Student Logged out'
+         ]);
       }
 }
