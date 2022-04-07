@@ -89,9 +89,13 @@ class StudentController extends Controller
 
       }
 
-      public function profile($id){
+      public function profile(){
 
-
+      return response()->json([
+               'status'=>'1',
+               'message'=>'User profile information',
+               'data'=>auth()->user()
+      ]);
       }
 
       public function logout($id){
